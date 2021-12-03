@@ -20,7 +20,7 @@ class TransactionController extends Controller
         $transaction = Transaction::orderBy('time', 'DESC')->get();
         $response=[
             'message'=>'List transactions order by time',
-            'date' => $transaction
+            'data' => $transaction
         ];
 
         // data, status
