@@ -5,11 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\Transaction;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 
 class TransactionController extends Controller
 {
+
+    protected $user;
+
+    public function __construct(){
+        $this->middleware('auth:api');
+        $this->user = $this->guard()->user();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,16 +34,6 @@ class TransactionController extends Controller
 
         // data, status
         return response()->json($response, Response::HTTP_OK);
-    }
-
-    /** Not used, handle with Vue JS
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -88,17 +87,6 @@ class TransactionController extends Controller
         ];
 
         return response()->json($response, Response::HTTP_OK);
-    }
-
-    /** Not used, handle with Vue JS
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -162,5 +150,9 @@ class TransactionController extends Controller
                 'message' => 'Failed '.$e->errorInfo,
             ];
         }
+    }
+
+    protected function guard(){
+        return Auth::guard();
     }
 }
