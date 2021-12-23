@@ -68,6 +68,7 @@ class TransactionController extends Controller
             $response =[
                 'message' => 'Failed '.$e->errorInfo,
             ];
+            return response()->json($response);
         }
     }
 
@@ -125,6 +126,7 @@ class TransactionController extends Controller
             $response =[
                 'message' => 'Failed '.$e->errorInfo,
             ];
+            return response()->json($response);
         }
     }
 
@@ -149,6 +151,7 @@ class TransactionController extends Controller
             $response =[
                 'message' => 'Failed '.$e->errorInfo,
             ];
+            return response()->json($response);
         }
     }
 
